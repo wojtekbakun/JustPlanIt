@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import "package:googleapis_auth/auth_io.dart";
-import 'package:googleapis/calendar/v3.dart' as calendar;
-import 'dart:html' as html;
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
@@ -18,75 +17,117 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Calendar(),
+      home: const HomeScreen(),
     );
   }
 }
 
-class Calendar extends StatelessWidget {
-  const Calendar({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController controller = TextEditingController();
+  String response = 'Response will appear here';
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    calendar.Event event = calendar.Event(
-      summary: 'My Event',
-      description: 'A description of my event',
-      start: calendar.EventDateTime(dateTime: DateTime.now()),
-      end: calendar.EventDateTime(
-          dateTime: DateTime.now().add(Duration(hours: 1))),
-    );
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calendar'),
-      ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Call a function to add the event to Google Calendar
-            debugPrint("Adding event to Google Calendar");
-            addToGoogleCalendar(event);
-            debugPrint("Done");
-          },
-          child: const Text('Add Event to Google Calendar'),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: PromptField(
+                controller: controller,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () async {
+                  try {
+                    final result = await fetchResponse(
+                        'http://localhost:3000/chat', controller.text);
+                    setState(() {
+                      response = result;
+                    });
+                  } catch (e) {
+                    setState(() {
+                      response = 'Failed to fetch data: $e';
+                    });
+                  }
+                },
+                child: const Text('Send Prompt'),
+              ),
+            ),
+            ResponseBox(
+              response: response,
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-void addToGoogleCalendar(calendar.Event event) async {
-  try {
-    await clientViaUserConsent(
-            ClientId(
-                "358106263610-ps2ep03p0gp9k3jcluj2q1jolktuidff.apps.googleusercontent.com",
-                "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"),
-            [calendar.CalendarApi.calendarScope],
-            prompt)
-        .then((AuthClient client) async {
-      try {
-        var calendarApi = calendar.CalendarApi(client);
-        var addedEvent =
-            await calendarApi.events.insert(event, "primary").then((value) {
-          print("ADDEDDD_________________${value.status}");
-          if (value.status == "confirmed") {
-            debugPrint('Event added in google calendar');
-          } else {
-            debugPrint("Unable to add event in google calendar");
-          }
-        });
-        debugPrint("Event added: ${addedEvent.htmlLink}");
-      } catch (e) {
-        debugPrint("Error adding event $e");
-      }
-    });
-  } catch (e) {
-    debugPrint("Error adding event: $e");
+class PromptField extends StatelessWidget {
+  final TextEditingController controller;
+  const PromptField({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      decoration: const InputDecoration(
+        labelText: 'Prompt',
+        hintText: 'Enter a prompt',
+      ),
+    );
   }
 }
 
-void prompt(String url) async {
-  // Otwórz URL w przeglądarce, aby użytkownik mógł zatwierdzić dostęp
-  html.window.open(url, '_blank');
-  debugPrint("Odpalam linku: $url");
-  //await launchUrlString(url);
+class ResponseBox extends StatelessWidget {
+  final String response;
+  const ResponseBox({super.key, required this.response});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(response),
+    );
+  }
+}
+
+Future<String> fetchResponse(String url, String text) async {
+  final response = await http.post(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      "prompt": text,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    // Jeśli serwer zwróci odpowiedź 200 OK, zwróć ciało odpowiedzi.
+    debugPrint("code 200");
+    return response.body;
+  } else {
+    // Jeśli serwer nie zwróci odpowiedzi 200 OK,
+    // rzuć wyjątek.
+    debugPrint("code ${response.statusCode}");
+    throw Exception('Failed to load data');
+  }
 }
