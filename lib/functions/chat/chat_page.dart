@@ -1,4 +1,4 @@
-import 'package:calend/http_functions.dart';
+import 'package:calend/functions/generate_plan/http/http_functions.dart';
 import 'package:flutter/material.dart';
 
 class ChatWidget extends StatefulWidget {

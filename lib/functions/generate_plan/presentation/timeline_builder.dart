@@ -1,4 +1,4 @@
-import "package:calend/event_card.dart";
+import "package:calend/functions/generate_plan/presentation/event_card.dart";
 import "package:flutter/material.dart";
 import "package:timeline_tile/timeline_tile.dart";
 

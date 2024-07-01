@@ -1,4 +1,4 @@
-import 'package:calend/timeline_page.dart';
+import 'package:calend/functions/generate_plan/presentation/timeline_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
