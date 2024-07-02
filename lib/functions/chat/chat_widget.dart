@@ -1,8 +1,10 @@
+import 'package:calend/functions/generate_plan/http/event_class.dart';
 import 'package:calend/functions/generate_plan/http/http_functions.dart';
 import 'package:flutter/material.dart';
 
 class ChatWidget extends StatefulWidget {
-  const ChatWidget({super.key});
+  final Function updateEvents;
+  const ChatWidget({super.key, required this.updateEvents});
 
   @override
   State<ChatWidget> createState() => _ChatWidgetState();
@@ -10,7 +12,6 @@ class ChatWidget extends StatefulWidget {
 
 class _ChatWidgetState extends State<ChatWidget> {
   final TextEditingController controller = TextEditingController();
-  String response = 'Response will appear here';
 
   @override
   void dispose() {
@@ -33,14 +34,11 @@ class _ChatWidgetState extends State<ChatWidget> {
           child: ElevatedButton(
             onPressed: () async {
               try {
-                final result = await fetchResponse(
-                    'http://localhost:4000/generate', controller.text);
-                setState(() {
-                  response = result;
-                });
+                widget.updateEvents(await fetchJsonResponse(
+                    'http://localhost:4000/generate', controller.text));
               } catch (e) {
                 setState(() {
-                  response = 'Failed to fetch data: $e';
+                  //  response = 'Failed to fetch data: $e';
                 });
               }
             },
