@@ -9,7 +9,10 @@ class MyTimelineTile extends StatelessWidget {
 
   final String title;
   final String description;
-  final String date;
+  final String startDate;
+  final String endDate;
+
+  final String resourceLink;
   const MyTimelineTile(
       {super.key,
       this.isFirst,
@@ -17,7 +20,9 @@ class MyTimelineTile extends StatelessWidget {
       this.isPast,
       required this.title,
       required this.description,
-      required this.date});
+      required this.startDate,
+      required this.endDate,
+      required this.resourceLink});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,9 @@ class MyTimelineTile extends StatelessWidget {
       endChild: EventCard(
         title: title,
         description: description,
-        date: date,
+        startDate: startDate,
+        endDate: endDate,
+        resourceLink: resourceLink,
       ),
       isFirst: isFirst ?? false,
       isLast: isLast ?? false,

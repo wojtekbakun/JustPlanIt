@@ -19,9 +19,9 @@ class Event {
     return Event(
       title: json['title'],
       description: json['description'],
-      startDate: json['start-date'],
-      endDate: json['end-date'],
-      resourceLink: json['resource-link'],
+      startDate: json['startDate'],
+      endDate: json['endDate'],
+      resourceLink: json['resourceLink'],
     );
   }
 }

@@ -19,6 +19,8 @@ class _ChatWidgetState extends State<ChatWidget> {
     super.dispose();
   }
 
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,19 +33,28 @@ class _ChatWidgetState extends State<ChatWidget> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: ElevatedButton(
-            onPressed: () async {
-              try {
-                widget.updateEvents(await fetchJsonResponse(
-                    'http://localhost:4000/generate', controller.text));
-              } catch (e) {
-                setState(() {
-                  //  response = 'Failed to fetch data: $e';
-                });
-              }
-            },
-            child: const Text('Send Prompt'),
-          ),
+          child: isLoading
+              ? const CircularProgressIndicator()
+              : ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    try {
+                      widget.updateEvents(await fetchJsonResponse(
+                          'http://localhost:4000/generate', controller.text));
+                    } catch (e) {
+                      setState(() {
+                        //  response = 'Failed to fetch data: $e';
+                      });
+                    } finally {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                  },
+                  child: const Text('Send Prompt'),
+                ),
         ),
       ],
     );
@@ -60,7 +71,7 @@ class PromptField extends StatelessWidget {
       controller: controller,
       decoration: const InputDecoration(
         labelText: 'What do you want to plan?',
-        hintText: 'I want to learn CSS in 3 weeks.',
+        hintText: 'Type it here...',
       ),
     );
   }

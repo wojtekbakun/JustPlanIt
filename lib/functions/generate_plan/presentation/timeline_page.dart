@@ -13,6 +13,7 @@ class TimelinePage extends StatefulWidget {
 class _TimelinePageState extends State<TimelinePage> {
   List<Event> events = [];
   void updateEvents(List<Event> newEvents) {
+    events.clear();
     setState(() {
       for (int i = 0; i < newEvents.length; i++) {
         events.add(newEvents[i]);
@@ -27,16 +28,24 @@ class _TimelinePageState extends State<TimelinePage> {
         child: Column(
           children: [
             ChatWidget(updateEvents: updateEvents),
-            ListView.builder(
-                itemCount: events.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => MyTimelineTile(
-                      isFirst: index == 0,
-                      isLast: index == events.length - 1,
-                      title: events[index].title,
-                      description: events[index].description,
-                      date: events[index].startDate,
-                    ))
+            Expanded(
+              child: ListView.builder(
+                  itemCount: events.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => MyTimelineTile(
+                        isFirst: index == 0,
+                        isLast: index == events.length - 1,
+                        title: events[index].title,
+                        description: events[index].description,
+                        startDate: events[index].startDate,
+                        endDate: events[index].endDate,
+                        resourceLink: events[index].resourceLink,
+                      )),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Send it to Google Calendar'),
+            ),
           ],
         ),
       ),

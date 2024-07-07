@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 class EventCard extends StatelessWidget {
   final String title;
   final String description;
-  final String date;
-  const EventCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.date});
+  final String? startDate;
+  final String? resourceLink;
+  final String? endDate;
+  const EventCard({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.startDate,
+    this.resourceLink,
+    this.endDate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +46,19 @@ class EventCard extends StatelessWidget {
             ),
           ),
           Text(
-            date,
+            startDate ?? '',
+            style: TextStyle(
+              fontSize: 10,
+            ),
+          ),
+          Text(
+            endDate ?? '',
+            style: TextStyle(
+              fontSize: 10,
+            ),
+          ),
+          Text(
+            resourceLink ?? '',
             style: TextStyle(
               fontSize: 10,
             ),
