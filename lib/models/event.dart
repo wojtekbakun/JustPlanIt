@@ -1,0 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class Event {
+  final String id;
+  final String title;
+  final String description;
+  final int taskNumber;
+  final String timezone;
+  final String startDate;
+  final String endDate;
+
+  Event({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.taskNumber,
+    required this.timezone,
+    required this.startDate,
+    required this.endDate,
+  });
+
+  factory Event.fromDocument(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return Event(
+      id: doc.id,
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
+      taskNumber: data['taskNumber'] ?? 0,
+      timezone: data['timezone'] ?? '',
+      startDate: data['startDate'] ?? '',
+      endDate: data['endDate'] ?? '',
+    );
+  }
+}

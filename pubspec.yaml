@@ -39,6 +39,9 @@ dependencies:
   http: ^1.2.1
   timelines: ^0.1.0
   timeline_tile: ^2.0.0
+  google_fonts: ^6.2.1
+  firebase_core: ^3.2.0
+  cloud_firestore: ^5.1.0
 
 dev_dependencies:
   flutter_test:

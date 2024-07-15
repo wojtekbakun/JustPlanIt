@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1018196176066",
+    "firebase_url": "https://justplanit-ebff7-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "justplanit-ebff7",
+    "storage_bucket": "justplanit-ebff7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018196176066:android:a77e232c926de704081f5b",
+        "android_client_info": {
+          "package_name": "com.just.planit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4073irroUrJYdYYi8GYr9NBMFmGGRocQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
