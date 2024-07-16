@@ -1,6 +1,7 @@
 import 'package:calend/service/event_service.dart';
 import 'package:calend/widgets/tiles/tile_events.dart';
 import 'package:calend/widgets/tiles/tile_prompt.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import "package:timeline_tile/timeline_tile.dart";
@@ -17,7 +18,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    const events = [
+    const eventsy = [
       SingleEventPoint(
         isFirst: true,
         title: 'First do it',
@@ -63,10 +64,6 @@ class _DashboardState extends State<Dashboard> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const TileEvents(
-              events: events,
-            ),
-            const TilePrompt(),
             StreamBuilder(
               stream: eventService.getEvents(),
               builder: (context, snapshot) {
@@ -78,7 +75,8 @@ class _DashboardState extends State<Dashboard> {
                 }
                 return const CircularProgressIndicator();
               },
-            )
+            ),
+            const TilePrompt(),
           ],
         ),
       ),

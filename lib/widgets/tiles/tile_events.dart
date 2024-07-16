@@ -1,3 +1,5 @@
+import 'package:calend/pages/dashboard.dart';
+import 'package:calend/utils/event_date.dart';
 import 'package:flutter/material.dart';
 
 class TileEvents extends StatelessWidget {
@@ -40,7 +42,14 @@ class TileEvents extends StatelessWidget {
                   : ListView.builder(
                       itemCount: events!.length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => events![index],
+                      itemBuilder: (context, index) => SingleEventPoint(
+                        title: events![index].title,
+                        date: EventUtils.getSingleEventDateAndTime(
+                          events![index],
+                        ),
+                        isFirst: index == 0,
+                        isLast: index == events!.length - 1,
+                      ),
                     ),
             ),
           ],
