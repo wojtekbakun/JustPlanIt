@@ -34,6 +34,25 @@ class _DashboardState extends State<Dashboard> {
               },
             ),
             const TilePrompt(),
+            StreamBuilder(
+              stream: eventService.getDocIds(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final events = snapshot.data!;
+                  return Card(
+                    child: Column(
+                      children: [
+                        for (var event in events)
+                          Text(
+                            event,
+                          ),
+                      ],
+                    ),
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
           ],
         ),
       ),

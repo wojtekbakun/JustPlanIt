@@ -30,7 +30,7 @@ class TileEvents extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 'Love letters maestry',
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
 
@@ -44,7 +44,7 @@ class TileEvents extends StatelessWidget {
                       shrinkWrap: true,
                       itemBuilder: (context, index) => SingleEventPoint(
                         title: events![index].title,
-                        date: EventUtils.getSingleEventDateAndTime(
+                        date: EventDateUtils.getSingleEventDateAndTime(
                           events![index],
                         ),
                         isFirst: index == 0,

@@ -39,8 +39,15 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
             headlineLarge: GoogleFonts.poppins(
               textStyle: TextStyle(
-                fontSize: 20.0,
+                fontSize: 22.0,
                 fontWeight: FontWeight.w800,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+            headlineMedium: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),

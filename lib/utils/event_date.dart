@@ -1,6 +1,6 @@
 import 'package:calend/models/event.dart';
 
-class EventUtils {
+class EventDateUtils {
   static String getSingleEventDateAndTime(Event event) {
     return '${getSingleEventDay(event)} | ${getSingleEventTime(event)}';
   }
