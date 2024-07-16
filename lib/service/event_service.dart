@@ -11,15 +11,24 @@ class EventService {
     return path;
   }
 
-  Stream<List<Event>> getEvents() {
-    return _getPath('Love Letter Mastery').snapshots().map((snapshot) {
+  Stream<List<Event>> getSteps(String latestEvent) {
+    return _getPath(latestEvent).snapshots().map((snapshot) {
       return snapshot.docs.map((doc) => Event.fromDocument(doc)).toList();
     });
   }
 
-  Stream<List<String>> getDocIds() {
-    return _events.snapshots().map((snapshot) {
+  Stream<List<String>> getAllDocIds() {
+    return _events
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) {
       return snapshot.docs.map((doc) => doc.id).toList();
     });
+  }
+
+  Stream<QuerySnapshot> getLatestEventId() {
+    final Stream<QuerySnapshot> latestId =
+        _events.orderBy('createdAt', descending: true).limit(1).snapshots();
+    return latestId;
   }
 }

@@ -22,37 +22,28 @@ class _DashboardState extends State<Dashboard> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             StreamBuilder(
-              stream: eventService.getEvents(),
+              stream: eventService.getLatestEventId(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final events = snapshot.data!;
-                  return TileEvents(
-                    events: events,
+                  final latestEvent = snapshot.data!.docs[0].id;
+                  return StreamBuilder(
+                    stream: eventService.getSteps(latestEvent),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final events = snapshot.data!;
+                        return TileEvents(
+                          events: events,
+                        );
+                      }
+                      return const CircularProgressIndicator();
+                    },
                   );
+                } else {
+                  return const CircularProgressIndicator();
                 }
-                return const CircularProgressIndicator();
               },
             ),
             const TilePrompt(),
-            StreamBuilder(
-              stream: eventService.getDocIds(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  final events = snapshot.data!;
-                  return Card(
-                    child: Column(
-                      children: [
-                        for (var event in events)
-                          Text(
-                            event,
-                          ),
-                      ],
-                    ),
-                  );
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
           ],
         ),
       ),
