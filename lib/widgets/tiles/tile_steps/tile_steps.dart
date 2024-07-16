@@ -1,5 +1,5 @@
-import 'package:calend/pages/dashboard.dart';
 import 'package:calend/utils/event_date.dart';
+import 'package:calend/widgets/tiles/tile_steps/tile_seteps_content/single_event_point.dart';
 import 'package:flutter/material.dart';
 
 class TileEvents extends StatelessWidget {
