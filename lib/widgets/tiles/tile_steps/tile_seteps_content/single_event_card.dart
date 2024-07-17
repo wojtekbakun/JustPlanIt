@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class SingleEventCard extends StatelessWidget {
+class SingleStepCard extends StatelessWidget {
   final String title;
   final String date;
-  const SingleEventCard({
+  const SingleStepCard({
     super.key,
     required this.title,
     required this.date,

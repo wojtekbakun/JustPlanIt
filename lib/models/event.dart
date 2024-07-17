@@ -8,6 +8,8 @@ class Event {
   final String timezone;
   final String startDate;
   final String endDate;
+  final String? resourceLink;
+  final String? resourceLinkTitle;
 
   Event({
     required this.id,
@@ -17,6 +19,8 @@ class Event {
     required this.timezone,
     required this.startDate,
     required this.endDate,
+    this.resourceLink,
+    this.resourceLinkTitle,
   });
 
   factory Event.fromDocument(DocumentSnapshot doc) {
@@ -29,6 +33,8 @@ class Event {
       timezone: data['timezone'] ?? '',
       startDate: data['startDate'] ?? '',
       endDate: data['endDate'] ?? '',
+      resourceLink: data['resourceLink'],
+      resourceLinkTitle: data['resourceLinkTitle'],
     );
   }
 }

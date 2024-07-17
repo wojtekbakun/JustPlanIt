@@ -1,3 +1,4 @@
+import 'package:calend/service/http_service.dart';
 import 'package:flutter/material.dart';
 import '../../../models/event.dart';
 
@@ -22,7 +23,8 @@ class _TilePromptState extends State<TilePrompt> {
       child: TilePromptContent(
         isHovering: isHovering,
         controller: controller,
-        onPressed: () {},
+        onPressed: () => HttpService(baseUrl: 'http://localhost:4000')
+            .post('/generatePlan', {'userInput': controller.text}),
       ),
     );
   }

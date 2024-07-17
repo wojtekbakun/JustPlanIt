@@ -2,14 +2,14 @@ import 'package:calend/widgets/tiles/tile_steps/tile_seteps_content/single_event
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-class SingleEventPoint extends StatelessWidget {
+class SingleStepPoint extends StatelessWidget {
   final bool? isActive;
   final bool? isFirst;
   final bool? isLast;
   final String title;
   final String date;
 
-  const SingleEventPoint({
+  const SingleStepPoint({
     super.key,
     this.isActive,
     this.isFirst,
@@ -38,7 +38,7 @@ class SingleEventPoint extends StatelessWidget {
               : Theme.of(context).colorScheme.surfaceContainer,
         ),
       ),
-      endChild: SingleEventCard(
+      endChild: SingleStepCard(
         title: title,
         date: date,
       ),

@@ -1,7 +1,7 @@
 import 'package:calend/models/event.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class EventService {
+class StepService {
   final CollectionReference _events =
       FirebaseFirestore.instance.collection('/events');
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -11,6 +11,7 @@ class EventService {
     return path;
   }
 
+//dlaczego to zwraca pusta liste
   Stream<List<Event>> getSteps(String latestEvent) {
     return _getPath(latestEvent).snapshots().map((snapshot) {
       return snapshot.docs.map((doc) => Event.fromDocument(doc)).toList();
