@@ -1,4 +1,5 @@
 import 'package:calend/models/event.dart';
+import 'package:calend/decorations.dart';
 import 'package:flutter/material.dart';
 
 class TileEvent extends StatelessWidget {
@@ -12,17 +13,7 @@ class TileEvent extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       height: 320,
       width: 320,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-              color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.2),
-              offset: const Offset(0, 0),
-              blurRadius: 10,
-              spreadRadius: 4),
-        ],
-      ),
+      decoration: AppDecorations.lightContainerDecoration,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -1,5 +1,7 @@
 import 'package:calend/service/http_service.dart';
+import 'package:calend/utils/step_radio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../../models/event.dart';
 
 class TilePrompt extends StatefulWidget {
@@ -23,8 +25,11 @@ class _TilePromptState extends State<TilePrompt> {
       child: TilePromptContent(
         isHovering: isHovering,
         controller: controller,
-        onPressed: () => HttpService(baseUrl: 'http://localhost:4000')
-            .post('/generatePlan', {'userInput': controller.text}),
+        onPressed: () {
+          context.read<RadioStep>().selectStep(0);
+          HttpService(baseUrl: 'http://localhost:4000')
+              .post('/generatePlan', {'userInput': controller.text});
+        },
       ),
     );
   }

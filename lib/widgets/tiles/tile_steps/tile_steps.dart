@@ -1,3 +1,4 @@
+import 'package:calend/decorations.dart';
 import 'package:calend/utils/step_date.dart';
 import 'package:calend/utils/step_radio.dart';
 import 'package:calend/widgets/tiles/tile_steps/tile_seteps_content/single_event_point.dart';
@@ -20,37 +21,28 @@ class TileSteps extends StatelessWidget {
     return Container(
       height: 480,
       width: 320,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-              color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.2),
-              offset: const Offset(0, 0),
-              blurRadius: 10,
-              spreadRadius: 4),
-        ],
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                title ?? 'Waiting for events',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
+      decoration: AppDecorations.lightContainerDecoration,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              title ?? 'Waiting for events',
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
+          ),
 
-            //timeline
-            Padding(
+          //timeline
+          Flexible(
+            child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: steps?.isEmpty == true
                   ? const Text('No events yet')
                   : ListView.builder(
                       itemCount: steps!.length,
-                      shrinkWrap: true,
+                      //shrinkWrap: true,
+                      // physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
                           context.read<RadioStep>().selectStep(index);
@@ -67,8 +59,8 @@ class TileSteps extends StatelessWidget {
                       ),
                     ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

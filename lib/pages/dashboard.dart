@@ -28,10 +28,12 @@ class _DashboardState extends State<Dashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    // Steps
                     StreamBuilder(
                       stream: eventService.getSteps(latestEvent ?? ''),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          debugPrint('latestEvent: $latestEvent');
                           final steps = snapshot.data!;
                           return TileSteps(
                             title: latestEvent,
@@ -44,14 +46,18 @@ class _DashboardState extends State<Dashboard> {
                         return const CircularProgressIndicator();
                       },
                     ),
+
+                    // Event
                     StreamBuilder(
                       stream: eventService.getSteps(latestEvent ?? ''),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          final steps = snapshot.data!;
+                          final steps = snapshot.data;
                           return TileEvent(
-                            event:
-                                steps[context.watch<RadioStep>().selectedStep],
+                            event: steps?.length == 1
+                                ? null
+                                : steps?[
+                                    context.watch<RadioStep>().selectedStep],
                           );
                         }
                         return const CircularProgressIndicator();
