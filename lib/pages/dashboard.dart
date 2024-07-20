@@ -1,6 +1,7 @@
 import 'package:calend/service/event_service.dart';
 import 'package:calend/utils/step_radio.dart';
 import 'package:calend/widgets/tiles/tile_event/tile_event.dart';
+import 'package:calend/widgets/tiles/tile_single_day/tile_single_day.dart';
 import 'package:calend/widgets/tiles/tile_steps/tile_steps.dart';
 import 'package:calend/widgets/tiles/tile_prompt/tile_prompt.dart';
 import 'package:flutter/material.dart';
@@ -48,22 +49,32 @@ class _DashboardState extends State<Dashboard> {
                     ),
 
                     // Event
-                    StreamBuilder(
-                      stream: eventService.getSteps(latestEvent ?? ''),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          final steps = snapshot.data;
-                          return TileEvent(
-                            event: steps?.length == 1
-                                ? null
-                                : steps?[
-                                    context.watch<RadioStep>().selectedStep],
-                          );
-                        }
-                        return const CircularProgressIndicator();
-                      },
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        StreamBuilder(
+                          stream: eventService.getSteps(latestEvent ?? ''),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final steps = snapshot.data;
+                              return TileEvent(
+                                event: steps?.length == 1
+                                    ? null
+                                    : steps?[context
+                                        .watch<RadioStep>()
+                                        .selectedStep],
+                              );
+                            }
+                            return const CircularProgressIndicator();
+                          },
+                        ),
+                        const TilePrompt(),
+                      ],
                     ),
-                    const TilePrompt(),
+                    SingleDayTile(
+                      date: DateTime.now(),
+                      events: [],
+                    ),
                   ],
                 ),
               );
