@@ -1,9 +1,10 @@
 import 'package:calend/decorations.dart';
+import 'package:calend/models/event.dart';
 import 'package:flutter/material.dart';
 
 class SingleDayTile extends StatelessWidget {
   final DateTime date;
-  final List<dynamic> events;
+  final List<EventModel> events;
   const SingleDayTile({super.key, required this.date, required this.events});
 
   @override
@@ -30,6 +31,22 @@ class SingleDayTile extends StatelessWidget {
                   ),
                   // Daily events
                   // Two columns - one for time, one for event
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            '${events[0].title}',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          Text(
+                            '${events[0].description}',
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),

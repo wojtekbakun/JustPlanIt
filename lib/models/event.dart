@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Event {
+class EventModel {
   final String id;
   final String title;
   final String description;
@@ -11,7 +11,7 @@ class Event {
   final String? resourceLink;
   final String? resourceLinkTitle;
 
-  Event({
+  EventModel({
     required this.id,
     required this.title,
     required this.description,
@@ -23,9 +23,9 @@ class Event {
     this.resourceLinkTitle,
   });
 
-  factory Event.fromDocument(DocumentSnapshot doc) {
+  factory EventModel.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return Event(
+    return EventModel(
       id: doc.id,
       title: data['title'] ?? '',
       description: data['description'] ?? '',

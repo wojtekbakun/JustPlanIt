@@ -15,7 +15,7 @@ class _TilePromptState extends State<TilePrompt> {
   bool isHovering = false;
   final TextEditingController controller = TextEditingController();
 
-  List<Event> eventslist = [];
+  List<EventModel> eventslist = [];
 
   @override
   Widget build(BuildContext context) {

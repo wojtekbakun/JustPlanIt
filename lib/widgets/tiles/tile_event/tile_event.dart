@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class TileEvent extends StatelessWidget {
   final String? title;
-  final Event? event;
+  final EventModel? event;
   const TileEvent({super.key, this.title, this.event});
 
   @override

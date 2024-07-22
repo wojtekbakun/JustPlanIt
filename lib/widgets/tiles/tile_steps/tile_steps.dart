@@ -38,7 +38,10 @@ class TileSteps extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: steps?.isEmpty == true
-                  ? const Text('No events yet')
+                  ? Text(
+                      'No events yet',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    )
                   : ListView.builder(
                       itemCount: steps!.length,
                       //shrinkWrap: true,
