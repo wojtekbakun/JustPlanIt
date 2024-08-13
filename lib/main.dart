@@ -1,6 +1,5 @@
 import 'package:calend/core/constants/colors.dart';
-import 'package:calend/core/utils/step_radio.dart';
-import 'package:provider/provider.dart';
+import 'package:calend/data/providers/providers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calend/presentation/screens/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -8,22 +7,10 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    const Providers(),
-  );
-}
-
-class Providers extends StatelessWidget {
-  const Providers({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => RadioStep()),
-      ],
+    AppProviders.initializeProviders(
       child: const JustPlanItApp(),
-    );
-  }
+    ),
+  );
 }
 
 class JustPlanItApp extends StatelessWidget {

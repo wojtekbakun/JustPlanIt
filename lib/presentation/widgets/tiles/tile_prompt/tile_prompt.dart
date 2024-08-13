@@ -1,4 +1,6 @@
-import 'package:calend/services/api/http_service.dart';
+import 'package:calend/data/repositories/user_input_repository.dart';
+import 'package:calend/domain/usecases/submit_user_input_usecase.dart';
+import 'package:calend/services/api/api_service.dart';
 import 'package:calend/core/utils/step_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +19,8 @@ class _TilePromptState extends State<TilePrompt> {
 
   List<EventModel> eventslist = [];
 
+  late final SubmitUserInputUseCase _submitUserInputUseCase;
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -25,10 +29,13 @@ class _TilePromptState extends State<TilePrompt> {
       child: TilePromptContent(
         isHovering: isHovering,
         controller: controller,
-        onPressed: () {
+        onPressed: () async {
           // context.read<RadioStep>().selectStep(0);
           // HttpService(baseUrl: 'http://localhost:4000')
           //     .post('/generatePlan', {'userInput': controller.text});
+          debugPrint('Pressed: ${controller.text}');
+          final response = await _submitUserInputUseCase(controller.text);
+          debugPrint('${response.body}');
         },
       ),
     );
@@ -45,12 +52,23 @@ class _TilePromptState extends State<TilePrompt> {
     controller.dispose();
     super.dispose();
   }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final ApiService apiService = ApiService();
+    final UserInputRepository userInputRepository =
+        UserInputRepository(apiService: apiService);
+    _submitUserInputUseCase =
+        SubmitUserInputUseCase(repository: userInputRepository);
+  }
 }
 
 class TilePromptContent extends StatelessWidget {
   final bool isHovering;
   final TextEditingController controller;
-  final VoidCallback onPressed;
+  final Function onPressed;
   const TilePromptContent({
     super.key,
     required this.isHovering,
@@ -99,7 +117,9 @@ class TilePromptContent extends StatelessWidget {
                   ),
                 ),
           ElevatedButton(
-            onPressed: onPressed,
+            onPressed: () {
+              onPressed();
+            },
             child: Text(
               'Just plan it',
               style: Theme.of(context).textTheme.bodyMedium,
