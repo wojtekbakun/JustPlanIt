@@ -1,9 +1,9 @@
-import 'package:calend/models/event.dart';
+import 'package:calend/data/models/event.dart';
 
 class StepDateUtils {
-  static String getSingleStepDateAndTime(EventModel event) {
-    return '${getSingleEventDay(event)} | ${getSingleEventTime(event)}';
-  }
+  // static String getSingleStepDateAndTime(EventModel event) {
+  //   return '${getSingleEventDay(event)} | ${getSingleEventTime(event)}';
+  // }
 
   static String getSingleEventData(List events, int index) {
     return _daysFromTo(
@@ -19,20 +19,20 @@ class StepDateUtils {
     return '${dateFrom.day} - ${dateTo.day}';
   }
 
-  static String getSingleEventDay(EventModel event) {
-    return _formatDate(DateTime.parse(event.startDate));
-  }
+  // static String getSingleEventDay(EventModel event) {
+  //   return _formatDate(DateTime.parse(event.startDate));
+  // }
 
   static String _formatDate(DateTime date) {
     return '${date.day}.${date.month}.${date.year}';
   }
 
-  static String getSingleEventTime(EventModel event) {
-    return _hoursFromTo(
-      event.startDate,
-      event.endDate,
-    );
-  }
+  // static String getSingleEventTime(EventModel event) {
+  //   return _hoursFromTo(
+  //     event.startDate,
+  //     event.endDate,
+  //   );
+  // }
 
   static String _hoursFromTo(String startDate, String endDate) {
     DateTime dateFrom = DateTime.parse(startDate);

@@ -1,7 +1,7 @@
-import 'package:calend/decorations.dart';
-import 'package:calend/utils/step_date.dart';
-import 'package:calend/utils/step_radio.dart';
-import 'package:calend/widgets/tiles/tile_steps/tile_seteps_content/single_event_point.dart';
+import 'package:calend/core/constants/decorations.dart';
+import 'package:calend/core/utils/step_date.dart';
+import 'package:calend/core/utils/step_radio.dart';
+import 'package:calend/presentation/widgets/tiles/tile_steps/tile_seteps_content/single_event_point.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,15 +50,15 @@ class TileSteps extends StatelessWidget {
                         onTap: () {
                           context.read<RadioStep>().selectStep(index);
                         },
-                        child: SingleStepPoint(
-                          title: steps![index].title,
-                          date: StepDateUtils.getSingleStepDateAndTime(
-                            steps![index],
-                          ),
-                          isFirst: index == 0,
-                          isLast: index == steps!.length - 1,
-                          isActive: index == clickedStep,
-                        ),
+                        // child: SingleStepPoint(
+                        //   title: steps![index].title,
+                        //   date: StepDateUtils.getSingleStepDateAndTime(
+                        //     steps![index],
+                        //   ),
+                        //   isFirst: index == 0,
+                        //   isLast: index == steps!.length - 1,
+                        //   isActive: index == clickedStep,
+                        // ),
                       ),
                     ),
             ),

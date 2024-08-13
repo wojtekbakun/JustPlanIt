@@ -1,4 +1,4 @@
-import 'package:calend/colors.dart';
+import 'colors.dart';
 import 'package:flutter/material.dart';
 
 class AppDecorations {

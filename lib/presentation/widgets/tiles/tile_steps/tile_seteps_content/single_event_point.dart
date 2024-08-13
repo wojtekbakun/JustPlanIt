@@ -1,4 +1,4 @@
-import 'package:calend/widgets/tiles/tile_steps/tile_seteps_content/single_event_card.dart';
+import 'package:calend/presentation/widgets/tiles/tile_steps/tile_seteps_content/single_event_card.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 

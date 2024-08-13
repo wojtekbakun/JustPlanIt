@@ -1,5 +1,5 @@
-import 'package:calend/decorations.dart';
-import 'package:calend/models/event.dart';
+import 'package:calend/core/constants/decorations.dart';
+import 'package:calend/data/models/event.dart';
 import 'package:flutter/material.dart';
 
 class SingleDayTile extends StatelessWidget {
@@ -35,14 +35,14 @@ class SingleDayTile extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          Text(
-                            '${events[0].title}',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          Text(
-                            '${events[0].description}',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
+                          // Text(
+                          //   '${events[0].title}',
+                          //   style: Theme.of(context).textTheme.labelMedium,
+                          // ),
+                          // Text(
+                          //   '${events[0].description}',
+                          //   style: Theme.of(context).textTheme.labelMedium,
+                          // ),
                         ],
                       )
                     ],

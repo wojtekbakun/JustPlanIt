@@ -1,17 +1,12 @@
-import 'package:calend/colors.dart';
-import 'package:calend/utils/step_radio.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:calend/core/constants/colors.dart';
+import 'package:calend/core/utils/step_radio.dart';
 import 'package:provider/provider.dart';
-import 'firebase_options.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:calend/pages/dashboard.dart';
+import 'package:calend/presentation/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(
     const Providers(),
   );
