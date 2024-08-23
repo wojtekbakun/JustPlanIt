@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class TileEvent extends StatelessWidget {
   final String? title;
-  final EventModel? event;
+  final EventDetail? event;
   const TileEvent({super.key, this.title, this.event});
 
   @override
@@ -23,18 +23,18 @@ class TileEvent extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 12.0),
               child: Text(
-                'Waiting for event',
+                event?.title ?? 'No title',
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
             Expanded(
               child: Text(
-                'No description',
+                event?.description ?? 'No description',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
             Text(
-              'No resource link',
+              event?.resourceLinkTitle ?? 'No resource link',
               style: Theme.of(context).textTheme.displaySmall,
             ),
           ],

@@ -1,6 +1,11 @@
+import 'package:calend/data/models/event.dart';
+import 'package:calend/data/providers/events.dart';
+import 'package:calend/data/providers/step_radio.dart';
 import 'package:calend/presentation/widgets/tiles/tile_event/tile_event.dart';
 import 'package:calend/presentation/widgets/tiles/tile_prompt/tile_prompt.dart';
+import 'package:calend/presentation/widgets/tiles/tile_steps/tile_steps.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -12,14 +17,22 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    List<EventModel> eventsList = context.watch<EventsProvider>().events;
+    int clickedStep = context.watch<RadioStep>().selectedStep;
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        body: const Column(
+        body: Column(
           children: [
-            TilePrompt(),
+            const TilePrompt(),
             TileEvent(
-              title: 'Hello',
+              event:
+                  eventsList.isEmpty ? null : eventsList[0].events[clickedStep],
             ),
+            TileSteps(
+              steps: eventsList.isEmpty ? [] : eventsList[0].events,
+              title: eventsList.isEmpty ? '' : eventsList[0].eventName,
+              clickedStep: clickedStep,
+            )
           ],
         ));
   }

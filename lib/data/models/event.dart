@@ -2,8 +2,8 @@ class EventDetail {
   final int taskNumber;
   final String title;
   final String description;
-  final String resourceLink;
-  final String resourceLinkTitle;
+  final String? resourceLink;
+  final String? resourceLinkTitle;
   final String startDate;
   final String endDate;
 
@@ -22,8 +22,8 @@ class EventDetail {
       taskNumber: json['taskNumber'],
       title: json['title'],
       description: json['description'],
-      resourceLink: json['resourceLink'],
-      resourceLinkTitle: json['resourceLinkTitle'],
+      resourceLink: json['resourceLink'] ?? '',
+      resourceLinkTitle: json['resourceLinkTitle'] ?? '',
       startDate: json['startDate'],
       endDate: json['endDate'],
     );
@@ -33,7 +33,7 @@ class EventDetail {
 class EventModel {
   //final String id;
   final String eventName;
-  final List<dynamic> events;
+  final List<EventDetail> events;
 
   EventModel({
     //required this.id,

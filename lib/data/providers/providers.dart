@@ -1,4 +1,5 @@
-import 'package:calend/core/utils/step_radio.dart';
+import 'package:calend/data/providers/events.dart';
+import 'package:calend/data/providers/step_radio.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class AppProviders {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => RadioStep()),
+        ChangeNotifierProvider(create: (_) => EventsProvider()),
       ],
       child: child,
     );

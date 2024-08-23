@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:calend/data/providers/events.dart';
 import 'package:calend/data/repositories/user_input_repository.dart';
 import 'package:calend/domain/usecases/submit_user_input_usecase.dart';
 import 'package:calend/services/api/api_service.dart';
-import 'package:calend/core/utils/step_radio.dart';
+import 'package:calend/data/providers/step_radio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../data/models/event.dart';
@@ -25,6 +26,7 @@ class _TilePromptState extends State<TilePrompt> {
 
   @override
   Widget build(BuildContext context) {
+    final eventsProvider = context.watch<EventsProvider>();
     return MouseRegion(
       onEnter: (event) => _onHover(true),
       onExit: (event) => _onHover(false),
@@ -35,6 +37,7 @@ class _TilePromptState extends State<TilePrompt> {
           // context.read<RadioStep>().selectStep(0);
           final response = await _submitUserInputUseCase(controller.text);
           EventModel event = EventModel.fromJson(jsonDecode(response.body));
+          eventsProvider.addEvent(event);
         },
       ),
     );
