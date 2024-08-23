@@ -25,7 +25,7 @@ class ApiService {
         ),
         body: body,
         headers: headers ?? {});
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return response;
     } else {
       throw Exception('Failed to load data: ${response.statusCode}');

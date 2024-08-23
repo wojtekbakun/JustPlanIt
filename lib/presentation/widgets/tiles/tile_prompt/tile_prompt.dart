@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:calend/data/repositories/user_input_repository.dart';
 import 'package:calend/domain/usecases/submit_user_input_usecase.dart';
 import 'package:calend/services/api/api_service.dart';
@@ -31,11 +33,8 @@ class _TilePromptState extends State<TilePrompt> {
         controller: controller,
         onPressed: () async {
           // context.read<RadioStep>().selectStep(0);
-          // HttpService(baseUrl: 'http://localhost:4000')
-          //     .post('/generatePlan', {'userInput': controller.text});
-          debugPrint('Pressed: ${controller.text}');
           final response = await _submitUserInputUseCase(controller.text);
-          debugPrint('${response.body}');
+          EventModel event = EventModel.fromJson(jsonDecode(response.body));
         },
       ),
     );
@@ -55,7 +54,6 @@ class _TilePromptState extends State<TilePrompt> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     final ApiService apiService = ApiService();
     final UserInputRepository userInputRepository =

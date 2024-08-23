@@ -20,23 +20,23 @@ class TileEvent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(bottom: 12.0),
-            //   child: Text(
-            //     event?.title ?? 'Waiting for event',
-            //     style: Theme.of(context).textTheme.headlineMedium,
-            //   ),
-            // ),
-            // Expanded(
-            //   child: Text(
-            //     event?.description ?? 'No description',
-            //     style: Theme.of(context).textTheme.bodySmall,
-            //   ),
-            // ),
-            // Text(
-            //   event?.resourceLinkTitle ?? 'No resource link',
-            //   style: Theme.of(context).textTheme.displaySmall,
-            // ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12.0),
+              child: Text(
+                'Waiting for event',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+            Expanded(
+              child: Text(
+                'No description',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+            Text(
+              'No resource link',
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
           ],
         ),
       ),
