@@ -1,15 +1,15 @@
 import 'package:http/http.dart' as http;
 
-import 'package:calend/services/api/api_endpoints.dart';
-import 'package:calend/services/api/api_headers.dart';
-import 'package:calend/services/api/api_service.dart';
+import 'package:calend/features/core/api/api_endpoints.dart';
+import 'package:calend/features/core/api/api_headers.dart';
+import 'package:calend/features/core/api/api_service.dart';
 
-class UserInputRepository {
+class NewEventRepository {
   final ApiService apiService;
 
-  UserInputRepository({required this.apiService});
+  NewEventRepository({required this.apiService});
 
-  Future<http.Response> submitUserInput(String userInput) async {
+  Future<http.Response> newEvent(String userInput) async {
     final response = await apiService.post(
       endpoint: ApiEndpoints.generatePlan,
       body: {'userInput': userInput},

@@ -1,4 +1,4 @@
-import 'package:calend/data/models/event.dart';
+import 'package:calend/features/core/models/event.dart';
 import 'package:flutter/material.dart';
 
 class EventsProvider extends ChangeNotifier {

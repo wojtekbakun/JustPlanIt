@@ -1,5 +1,5 @@
-import 'package:calend/data/providers/events.dart';
-import 'package:calend/data/providers/step_radio.dart';
+import 'package:calend/features/core/providers/events.dart';
+import 'package:calend/features/core/providers/step_radio.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
